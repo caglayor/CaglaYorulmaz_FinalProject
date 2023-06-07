@@ -1,0 +1,83 @@
+﻿@model IEnumerable<CETHotelProject_CY.Models.Reservation>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <h2>All Reservations</h2>
+                    <div class="bt-option">
+                        <a href="/">Admin Panel</a>
+                        <span>Reservations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="rooms-section spad">
+    <div class="container">
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StartDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EndDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Room.Name)
+                        </th>
+                        <th>
+                            Customer Name-Surname
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TotalPaid)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TotalDays)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+            @foreach (var item in Model) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Room.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ApplicationUser.NameSurname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalPaid) $
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalDays) days
+                        </td>
+                        <td>
+                                <a href="/User/Reservations/Details/@item.Id">Details</a> |
+                                <a href="/User/Reservations/Delete/@item.Id">Delete</a>
+                        </td>
+                    </tr>
+            }
+                </tbody>
+            </table>
+         </div>
+    </div>
+</section>

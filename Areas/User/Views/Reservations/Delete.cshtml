@@ -1,0 +1,104 @@
+﻿@model CETHotelProject_CY.Models.Reservation
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <h2>Delete Reservation</h2>
+                    <div class="bt-option">
+                        <a href="/">User Panel</a>
+                        <span>Reservations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="room-details-section spad">
+    <div class="container">
+        <h3>Are you sure you want to delete this?</h3>
+        <hr />
+        <div class="row">
+            <div class="col-lg-3">
+                <img src="~/img/room/room-@((int)(Model.Room.Type)+1).jpg" alt="">
+            </div>
+            <div class="col-lg-9">
+                <div class="room-details-item">
+                    <div class="rd-text">
+                        <div class="rd-title">
+                            <h3>@Model.Room.Name</h3>
+                            <div class="rdt-right">
+                                <div class="rating">
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star-half_alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <h2>@Model.Room.DayPrice$<span> /Pernight</span></h2>
+                        <h2>@Model.TotalPaid$<span> /Total Paid</span></h2>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="r-o">Reservation Start Date:</td>
+                                    <td>@Html.DisplayFor(model => model.StartDate)</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Reservation End Date:</td>
+                                    <td>@Html.DisplayFor(model => model.EndDate)</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Total Reserved Day:</td>
+                                    <td>@Html.DisplayFor(model => model.TotalDays) days</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Reserved Name-Surname:</td>
+                                    <td>@Html.DisplayFor(model => model.ApplicationUser.NameSurname)</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Reserved Email:</td>
+                                    <td>@Html.DisplayFor(model => model.ApplicationUser.Email)</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Size:</td>
+                                    <td>30 ft</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Capacity:</td>
+                                    <td>Max person @Model.Room.Capacity</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Bed:</td>
+                                    <td>King Beds</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Services:</td>
+                                    <td>Wifi, Television, Bathroom,...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <form method="post" action="/User/Reservations/DeleteConfirmed">
+                            <input type="hidden" asp-for="Id" />
+                            <input type="submit" value="Delete" class="btn btn-danger" /> 
+                            <a href="/User/Reservations">Back To List</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</>

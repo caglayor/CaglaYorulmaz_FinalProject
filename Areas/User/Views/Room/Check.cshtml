@@ -1,0 +1,68 @@
+﻿@model CETHotelProject_CY.Models.ViewModels.SearchRoomViewModel
+
+@{
+    ViewData["Title"] = "Check Rooms";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Breadcrumb Section Begin -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <h2>Available Rooms</h2>
+                    <div class="bt-option">
+                        <a href="/">Home</a>
+                        <span>Rooms</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section End -->
+<section class="rooms-section spad">
+    <div class="container">
+        <div class="row">
+            @if (Model.Room.Count() == 0)
+            {
+                <p>No available rooms were found according to your search.</p>
+            }
+            @foreach (var item in Model.Room)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="room-item">
+                        <img src="~/img/room/room-@(((int)item.Type)+1).jpg" alt="">
+                        <div class="ri-text">
+                            <h4>@item.Name</h4>
+                            <h3>@item.DayPrice$<span>/Pernight</span></h3>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="r-o">Size:</td>
+                                        <td>30 ft</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Capacity:</td>
+                                        <td>Max person: <b>@item.Capacity</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Category:</td>
+                                        <td>@item.Type</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Services:</td>
+                                        <td>Wifi, Television, Bathroom,...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href="Reserve/@item.Id?dateIn=@Model.DateFrom&dateOut=@Model.DateTo" class="primary-btn">Reserve</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

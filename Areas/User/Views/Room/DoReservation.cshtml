@@ -1,0 +1,65 @@
+﻿@model CETHotelProject_CY.Models.Reservation
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Reservation Successfully";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb Section Begin -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <h2>Reservation Info</h2>
+                    <div class="bt-option">
+                        <span>Reservation Successfull, Your Reserved Room Info Is Below</span>
+                    </div>
+                    <a href="/User/Reservations">Go to My Reservations Panel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section End -->
+<section class="rooms-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-8 mx-auto text-center">
+                <h4><b>Reserved Person Name: </b>@Model.ApplicationUser.Name</h4>
+                <h4><b>Reserved Person Surname: </b>@Model.ApplicationUser.Surname</h4>
+                <hr />
+                    <div class="room-item">
+                        <img src="~/img/room/room-@(((int)Model.Room.Type)+1).jpg" alt="">
+                        <div class="ri-text">
+                        <h4>@Model.Room.Name</h4>
+                        <h3><span>Total Paid:</span> @Model.TotalPaid$</h3>
+                        <h3><span>Reserved Day Count:</span> @Model.TotalDays</h3>
+                        <h3><span>Daily Price:</span> @Model.Room.DayPrice$</h3>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="r-o">Size:</td>
+                                        <td>30 ft</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Capacity:</td>
+                                    <td>Max person: <b>@Model.Room.Capacity</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Category:</td>
+                                    <td>@Model.Room.Type</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Services:</td>
+                                        <td>Wifi, Television, Bathroom,...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</section>

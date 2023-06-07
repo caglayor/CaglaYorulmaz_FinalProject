@@ -1,0 +1,107 @@
+﻿@model CETHotelProject_CY.Models.ViewModels.ReserveRoomViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Reserve Rooms";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <h2>Reservation</h2>
+                    <div class="bt-option">
+                        <a>Home</a>
+                        <span>Rooms</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section End -->
+
+<section class="room-details-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <img src="~/img/room/room-@((int)(Model.Room.Type)+1).jpg" alt="">
+            </div>
+            <div class="col-lg-5">
+                <div class="room-details-item">
+                    <div class="rd-text">
+                        <div class="rd-title">
+                            <h3>@Model.Room.Name</h3>
+                            <div class="rdt-right">
+                                <div class="rating">
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star-half_alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <h2>@Model.Room.DayPrice$<span>/Pernight</span></h2>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="r-o">Size:</td>
+                                    <td>30 ft</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Capacity:</td>
+                                    <td>Max person @Model.Room.Capacity</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Bed:</td>
+                                    <td>King Beds</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Services:</td>
+                                    <td>Wifi, Television, Bathroom,...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="room-booking">
+                    <h3>Your Reservation</h3>
+                    <form method="post" action="../DoReservation" id="doReservation">
+                        <div class="check-date">
+                            <label for="date-in">Check In:</label>
+                            <input  type="text" class="date-input" id="date-in" value="@Model.DateFrom.ToShortDateString()" disabled>
+                            <input asp-for="DateFrom" type="hidden" class="date-input" id="date-in" value="@Model.DateFrom.ToShortDateString()">
+                            <i class="icon_calendar"></i>
+                        </div>
+                        <div class="check-date">
+                            <label for="date-out">Check Out:</label>
+                            <input type="text" class="date-input" id="date-out" value="@Model.DateTo.ToShortDateString()" disabled>
+                            <input asp-for="DateTo" type="hidden" class="date-input" id="date-in" value="@Model.DateTo.ToShortDateString()">
+
+                            <i class="icon_calendar"></i>
+                        </div>
+                        <h3><span>Total Price:</span> @Model.TotalPrice$</h3>
+                        <input type="hidden" id="totalPrice" asp-for="TotalPrice" value="@Model.TotalPrice">
+                        <input type="hidden" id="roomId" asp-for="RoomId" value="@Model.Room.Id">
+                        <h3><span>Total Days:</span> @Model.TotalDays</h3>
+                        <input type="hidden" id="totalDays" asp-for="TotalDays" value="@Model.TotalDays">
+                        <button type="submit">PAY AND BOOK NOW</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $('#doReservation').submit(function () {
+        event.preventDefault();
+        $("#date-in").prop('disabled', false);
+        $("#date-out").prop('disabled', false);
+    })
+</script>
